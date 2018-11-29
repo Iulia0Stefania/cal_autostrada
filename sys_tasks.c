@@ -7,9 +7,11 @@
 
 #include "general.h"
 #include "sys_tasks.h"
-
+#include "hal_motor.h"
 #include "mcal_init.h"
-T_U8 u8Speed;
+T_U8 u8Speed;	
+
+int angle=90;
 void TASK_Inits()
 {
     MCAL_vInit();
@@ -18,17 +20,39 @@ void TASK_Inits()
 
 void TASK_1ms()
 {
-
+	
+	
 }
 
 void TASK_5ms()
 {
-
+	vSetMotorDir(INAINTE);
+	vSetMotorSpeed(50);
+	if(angle<=90 && angle>60)
+	{
+		vSetAngle(angle);
+		angle--;
+	}
+	else if(angle==60)
+	{
+		vSetAngle(angle);
+		angle++;
+	}
+	else if(angle>=60 && angle<=90 )
+	{
+		vSetAngle(angle);
+		angle++;
+	} 
+	else if(angle>90)
+	{
+		vSetAngle(angle);
+		angle++;	
+	}
 }
 
 void TASK_10ms()
 {   
-	u8Speed++;
+/*	u8Speed++;
 	vSetMotorSpeed(u8Speed);
 	if(u8Speed==60)
 	{	
@@ -39,12 +63,16 @@ void TASK_10ms()
 	{
 		vSetMotorDir(INAPOI);
 	}
-	
+	*/
 }
 
 void TASK_100ms()
 { 
-    
+   
+	
+
+	
+	
 }
 
 void TASK_500ms()
@@ -55,4 +83,5 @@ void TASK_500ms()
 void TASK_1000ms()
 {
 
+	
 }
