@@ -9,6 +9,9 @@
 #include "sys_tasks.h"
 #include "hal_motor.h"
 #include "mcal_init.h"
+#include "asw.h"
+#include "rte.h"
+
 T_U8 u8Speed;	
 
 int angle=90;
@@ -16,62 +19,29 @@ void TASK_Inits()
 {
     MCAL_vInit();
     GPIO_u8SetPortPin(PORT_A, 10, DIGITAL, OUTPUT);	
+	RTE_vMotorInit();
+	RTE_vSetMotorDir(INAINTE);
+	RTE_vSetMotorSpeed(30);
 }
 
 void TASK_1ms()
 {
-	
-	
+	ASW_LineFolower();
 }
 
 void TASK_5ms()
 {
-	vSetMotorDir(INAINTE);
-	vSetMotorSpeed(50);
-	if(angle<=90 && angle>60)
-	{
-		vSetAngle(angle);
-		angle--;
-	}
-	else if(angle==60)
-	{
-		vSetAngle(angle);
-		angle++;
-	}
-	else if(angle>=60 && angle<=90 )
-	{
-		vSetAngle(angle);
-		angle++;
-	} 
-	else if(angle>90)
-	{
-		vSetAngle(angle);
-		angle++;	
-	}
+
 }
 
 void TASK_10ms()
 {   
-/*	u8Speed++;
-	vSetMotorSpeed(u8Speed);
-	if(u8Speed==60)
-	{	
-		vSetMotorDir(INAINTE);
-		u8Speed=0;
-	}
-	if(u8Speed==0)
-	{
-		vSetMotorDir(INAPOI);
-	}
-	*/
+
 }
 
 void TASK_100ms()
 { 
-   
-	
-
-	
+ 
 	
 }
 
